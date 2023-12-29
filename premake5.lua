@@ -30,9 +30,9 @@ project "GLFW"
     }
 
     filter "system:windows"
-        buildoptions { "-std=c20", "-lgdi32" } -- -lgdi32 is for glfwGetWin32Window
+        -- buildoptions { "-std=c20", "-lgdi32" } -- -lgdi32 is for glfwGetWin32Window
         systemversion "latest"
-        staticruntime "On"
+        -- staticruntime "On"
 
         files
         {
@@ -55,6 +55,9 @@ project "GLFW"
             "_GLFW_WIN32",
             "_CRT_SECURE_NO_WARNINGS"
         }
-        
-    filter { "system:windows", "configurations:Release" }
-        buildoptions "/MT"
+
+    filter "configurations:Debug"
+        defines { "DEBUG" }
+        symbols "On"
+        staticruntime "off"
+        runtime "Debug"
